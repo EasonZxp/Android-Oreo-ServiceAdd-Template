@@ -1,0 +1,35 @@
+cc_library_shared {
+    name: "android.hardware.kdcdmsi@1.0-impl",
+    relative_install_path: "hw",
+    proprietary: true,
+    srcs: [
+        "KdcDmsi.cpp",
+    ],
+    shared_libs: [
+        "libhidlbase",
+        "libhidltransport",
+		"liblog",
+		"libhardware",
+        "libutils",
+        "android.hardware.kdcdmsi@1.0",
+    ],
+}
+
+cc_binary {
+    name: "android.hardware.kdcdmsi@1.0-service",
+    relative_install_path: "hw",
+    defaults: ["hidl_defaults"],
+    proprietary: true,
+    init_rc: ["android.hardware.kdcdmsi@1.0-service.rc"],
+    srcs: ["service.cpp"],
+    shared_libs: [
+        "liblog",
+        "libdl",
+        "libutils",
+        "libhardware",
+        "libhidlbase",
+        "libhidltransport",
+        "android.hardware.kdcdmsi@1.0",
+        "android.hardware.kdcdmsi@1.0-impl",
+    ],
+}
